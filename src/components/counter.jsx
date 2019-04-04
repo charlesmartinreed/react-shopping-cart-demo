@@ -13,10 +13,13 @@ export default class Counter extends Component {
   };
 
   // these are the properties we set on our components, excluding key
+  // {this.props.children} can be used to access children for a component
   // console.log("props", this.props);
   render() {
+    console.log(this.props);
     return (
       <div>
+        <h4>{this.props.id}</h4>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
           onClick={this.handleIncrement}
