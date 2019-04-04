@@ -3,36 +3,45 @@ import React, { Component } from "react";
 export default class Counter extends Component {
   // state obj comprises any data the Component might need
   state = {
-    count: 0,
-    tags: []
+    count: 0
   };
 
-  // since we can't use conditionals inside of our render method, we use this helper method to determine what to render based upon what
+  // constructor() {
+  //   super();
+  //   // returns new instance of handleIncrement where this is always referencing the current counter object
+  //   this.handleIncrement = this.handleIncrement.bind(this);
+  // }
 
-  renderTags() {
-    if (this.state.tags.length === 0) return <p>There are currently no tags</p>;
+  // alternatively, since arrow functions don't get their own 'this' but rather inherit it, we can make our method an arrow function rather than using the convoluted constructor/bind style seen above
 
-    return (
-      <ul>
-        {this.state.tags.map(tag => (
-          <li key={tag}>{tag}</li>
-        ))}
-      </ul>
-    );
-  }
+  handleIncrement = () => {
+    console.log("Increment Clicked", this);
+  };
 
-  // alternatively, we can use the logical && to handle conditionals
-  // basically, since we can apply the logical AND between non-boolean
-  // an empty string is falsey, non-empty is truthy
-  // true && 'Hi' && 1 - truthy, truthy, truthy, result is derived from last operand
+  // note that, unlike in vanilla JS, we don't call the function attached to the onClick listener immediately
   render() {
     return (
       <div>
-        {this.state.tags.length === 0 && "Please create a new tag!"}
-        {this.renderTags()}
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement()}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
       </div>
     );
   }
-}
 
-// export default Counter;
+  formatCount() {
+    const { count } = this.state;
+    return count === 0 ? "Zero" : count;
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    return (classes += this.state.count === 0 ? "warning" : "primary");
+  }
+
+  // export default Counter;
+}
