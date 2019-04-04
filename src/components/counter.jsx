@@ -6,16 +6,14 @@ export default class Counter extends Component {
     count: 0
   };
 
-  // constructor() {
-  //   super();
-  //   // returns new instance of handleIncrement where this is always referencing the current counter object
-  //   this.handleIncrement = this.handleIncrement.bind(this);
-  // }
-
-  // alternatively, since arrow functions don't get their own 'this' but rather inherit it, we can make our method an arrow function rather than using the convoluted constructor/bind style seen above
-
+  //in react, we don't modify the state directly
+  // not this.state.count++; this technically works, but react is not aware of it
+  // instead we use the setState method which brings the virtual DOM in line with the DOM
+  // so when we pass the object to setState it either finds and updates the value or creates one accordingly
   handleIncrement = () => {
-    console.log("Increment Clicked", this);
+    this.setState({
+      count: this.state.count + 1
+    });
   };
 
   // note that, unlike in vanilla JS, we don't call the function attached to the onClick listener immediately
@@ -24,7 +22,7 @@ export default class Counter extends Component {
       <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={this.handleIncrement()}
+          onClick={this.handleIncrement}
           className="btn btn-secondary btn-sm"
         >
           Increment
