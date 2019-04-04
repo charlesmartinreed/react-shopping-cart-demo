@@ -3,23 +3,23 @@ import React, { Component } from "react";
 export default class Counter extends Component {
   // state obj comprises any data the Component might need
   state = {
-    count: 0
+    value: this.props.value
   };
 
-  handleIncrement = product => {
-    console.log(product);
+  handleIncrement = () => {
     this.setState({
-      count: this.state.count + 1
+      value: this.state.value + 1
     });
   };
 
-  // need to pass an argument to an event handler? Use an arrow function
+  // these are the properties we set on our components, excluding key
+  // console.log("props", this.props);
   render() {
     return (
       <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={() => this.handleIncrement(product)}
+          onClick={this.handleIncrement}
           className="btn btn-secondary btn-sm"
         >
           Increment
@@ -29,7 +29,7 @@ export default class Counter extends Component {
   }
 
   formatCount() {
-    const { count } = this.state;
+    const { value: count } = this.state;
     return count === 0 ? "Zero" : count;
   }
 
