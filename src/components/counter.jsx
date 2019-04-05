@@ -7,16 +7,18 @@ import React, { Component } from "react";
 
 export default class Counter extends Component {
   // state obj comprises any data the Component might need
-  state = {
-    value: this.props.counter.value
-  };
+  // this state code is executed once, when the component is created
+  // delete state during conversion to CONTROLLED PROPERTY
+  // state = {
+  //   value: this.props.counter.value
+  // };
 
-  handleIncrement = () => {
-    // this.props.value = 0; NOPE! The prop is read only - this is where we use our setState because the property has a state, as does the component
-    this.setState({
-      value: this.state.value + 1
-    });
-  };
+  // handleIncrement = () => {
+  //   // this.props.value = 0; NOPE! The prop is read only - this is where we use our setState because the property has a state, as does the component
+  //   this.setState({
+  //     value: this.state.value + 1
+  //   });
+  // };
 
   // these are the properties we set on our components, excluding key
   // {this.props.children} can be used to access children for a component
@@ -26,7 +28,7 @@ export default class Counter extends Component {
       <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={this.handleIncrement}
+          onClick={() => this.props.onIncrement(this.props.counter)}
           className="btn btn-secondary btn-sm"
         >
           Increment
@@ -42,13 +44,13 @@ export default class Counter extends Component {
   }
 
   formatCount() {
-    const { value: count } = this.state;
+    const { value: count } = this.props.counter;
     return count === 0 ? "Zero" : count;
   }
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    return (classes += this.state.value === 0 ? "warning" : "primary");
+    return (classes += this.props.counter.value === 0 ? "warning" : "primary");
   }
 
   // export default Counter;
