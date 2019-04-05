@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 // because counter is default export, we don't need {} around it
 import Counters from "./components/counters";
 
-ReactDOM.render(<Counters />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
