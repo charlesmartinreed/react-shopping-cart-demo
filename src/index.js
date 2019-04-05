@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 // because counter is default export, we don't need {} around it
-import Counters from "./components/counters";
+// import Counters from "./components/counters";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
